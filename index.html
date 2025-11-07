@@ -1,73 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chokchai Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="utf-8" />
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<title>Chokchai</title>
+<link href="https://fonts.googleapis.com" rel="preconnect" />
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        primary: "#1173d4",
+        "background-light": "#f6f7f8",
+        "background-dark": "#101922",
+      },
+      fontFamily: { display: ["Inter"] },
+      borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+    },
+  },
+};
+</script>
+<link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+<style>
+body {
+  min-height: max(884px, 100dvh);
+}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-800">
-  <!-- Navbar -->
-  <nav class="bg-white shadow-md py-4">
-    <div class="max-w-5xl mx-auto flex justify-between items-center px-4">
-      <h1 class="text-xl font-bold">Chokchai</h1>
-      <div class="space-x-6">
-        <a href="#home" class="hover:text-blue-600">Home</a>
-        <a href="#contact" class="hover:text-blue-600">Contact</a>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col justify-between">
+  <div class="flex-grow">
+    <!-- Header -->
+    <header class="flex items-center justify-between p-4 bg-background-light dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-10">
+      <h2 class="text-xl font-bold text-background-dark dark:text-background-light">Chokchai</h2>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <div class="p-4">
+        <div class="flex min-h-[480px] flex-col items-start justify-end gap-6 rounded-xl bg-cover bg-center p-6" 
+          style='background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.1)), url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1FuksPWxC9hK3Fy3anOTnkPBmk73t93DTPnQkGP7F-Fi3iY24nwweFB6m3lUII8TBr3nevIERHnf2YlduqO9D_o-UKlBqGTVmqD8JFIT_hlSTD280Z77nE7m8QAr3ez40xYwYtxtEPAqYXktDa0e2DMS9le8fIZUFxj1WvFhmiyKGMeGMAs0o8tcIQ4Wg9U83khfvitlAhu0ip-ZRsZf6JRyL5cMqBtwpcyJ36G6cRVVq_ckOf_psHXQYgovHMvY42RocXQxd14I")'>
+          <div class="flex flex-col gap-2">
+            <h1 class="text-4xl font-black text-white md:text-5xl">Create Tomorrow Today</h1>
+            <p class="text-base text-white/90 md:text-lg">
+              With Chokchai Life Insurance, you're not just buying a policy; you're investing in peace of mind.
+            </p>
+          </div>
+          <button class="flex h-12 items-center justify-center rounded-lg bg-primary px-5 text-base font-bold text-white hover:bg-blue-700">
+            Get a Free Quote
+          </button>
+        </div>
       </div>
-    </div>
-  </nav>
 
-  <!-- Home Section -->
-  <section id="home" class="max-w-4xl mx-auto py-20 px-4 text-center">
-    <h2 class="text-4xl font-bold mb-6">Welcome to My Website</h2>
-    <p class="text-lg text-gray-600">
-      สวัสดีครับ ผมชื่อโชคชัย นี่คือเว็บไซต์แนะนำตัวและช่องทางติดต่อของผมครับ
-    </p>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="max-w-4xl mx-auto py-20 px-4">
-    <h2 class="text-3xl font-bold mb-8">Contact Us</h2>
-
-    <form id="contact-form" class="space-y-4">
-      <input type="text" name="name" placeholder="Your Name" required class="w-full border p-3 rounded" />
-      <input type="email" name="email" placeholder="Your Email" required class="w-full border p-3 rounded" />
-      <textarea name="message" rows="5" placeholder="Your Message" required class="w-full border p-3 rounded"></textarea>
-      <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Send Message</button>
-      <p id="form-status" class="text-sm mt-3 hidden"></p>
-    </form>
-  </section>
-
-  <script>
-    document.getElementById("contact-form").addEventListener("submit", async function(event) {
-      event.preventDefault();
-      const form = event.target;
-      const data = new FormData(form);
-      const status = document.getElementById("form-status");
-
-      try {
-        const response = await fetch("https://formspree.io/f/xrbonvne", {
-          method: "POST",
-          body: data,
-          headers: { "Accept": "application/json" }
-        });
-        if (response.ok) {
-          status.textContent = "✅ Message sent successfully!";
-          status.classList.remove("hidden");
-          status.classList.add("text-green-600");
-          form.reset();
-        } else {
-          status.textContent = "❌ Error sending message.";
-          status.classList.remove("hidden");
-          status.classList.add("text-red-600");
-        }
-      } catch {
-        status.textContent = "⚠️ Network error.";
-        status.classList.remove("hidden");
-        status.classList.add("text-red-600");
-      }
-    });
-  </script>
-</body>
-</html>
+      <!-- Contact Form -->
+      <div class="p-4">
+        <h2 class="mb-4 text-2xl font-bold text-backgro
